@@ -525,3 +525,5 @@ function Admin({res,setRes,adm,setAdm}){
         </div>
       </div>
     </div>
+  );
+}
