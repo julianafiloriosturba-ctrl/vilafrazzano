@@ -102,7 +102,7 @@ function Home({ir}){
 }
 
 function Quartos(){
-  const qs=[{n:1,i:"👑",nm:"Suíte Master",c:"King Size",d:"Cama king size, banheiro privativo.",t:"✓ Banheiro privativo · 2 pessoas",sb:false},{n:2,i:"🌿",nm:"Suíte 2",c:"Casal + Solteiro",d:"Cama casal e solteiro, banheiro privativo.",t:"✓ Banheiro privativo · até 3 pessoas",sb:false},{n:3,i:"🌊",nm:"Suíte 3",c:"Casal",d:"Cama casal, banheiro privativo.",t:"✓ Banheiro privativo · 2 pessoas",sb:false},{n:4,i:"☀️",nm:"Suíte 4",c:"Casal + Solteiro",d:"Cama casal e solteiro, banheiro privativo.",t:"✓ Banheiro privativo · até 3 pessoas",sb:false},{n:5,i:"🤝",nm:"Quarto Compartilhado",c:"2 Casal + Beliche",d:"Sem banheiro privativo. Para grupos grandes.",t:"⚠ Sem banheiro privativo",sb:true}];
+  const qs=[{n:1,i:"👑",nm:"Suíte Reale",c:"King Size",d:"Cama king size, banheiro privativo.",t:"✓ Banheiro privativo com hidromassagem · 2 pessoas",sb:false},{n:2,i:"🌿",nm:"Suíte 2 Allegra",c:"Casal + Solteiro elevada com escorregador",d:"Cama casal e solteiro, banheiro privativo.",t:"✓ Banheiro privativo · até 3 pessoas",sb:false},{n:3,i:"🌊",nm:"Suíte 3 Armonia",c:"Familia",d:"2 Cama casal, banheiro privativo.",t:"✓ Banheiro privativo · 4 pessoas",sb:false},{n:4,i:"☀️",nm:"Suíte 4 Serena",c:"2 Casal + Solteiro",d:"2 Cama casal e solteiro, banheiro privativo.",t:"✓ Banheiro privativo · até 5 pessoas",sb:false},{n:5,i:"🤝",nm:"Quarto condiviso Compartilhado",c:"2 Casal + Beliche",d:"Sem banheiro privativo. Para grupos grandes.",t:"⚠ Sem banheiro privativo",sb:true}];
   return(
     <div style={{padding:"44px 20px",background:"#f4efe6"}}>
       <div style={{maxWidth:860,margin:"0 auto"}}>
@@ -426,10 +426,20 @@ function Formulario({res,setRes}){
   const updF=(k,v)=>setF(p=>({...p,[k]:v}));
   const updAc=(i,k,v)=>setAc(p=>p.map((a,j)=>j===i?{...a,[k]:v}:a));
   
-  useEffect(()=>{
-    const n=Math.max(0,qtd-1);
-    setAc(a=>Array.from({length:n},(_,i)=>a[i]||{nome:"",cpf:"",email:"",quarto:""}));
-  },[qtd]);
+  const handleQtdChange=(newQtd)=>{
+    setQtd(newQtd);
+    const n=Math.max(0,newQtd-1);
+    setAc(a=>{
+      const current=a.length;
+      if(n>current){
+        return [...a,...Array(n-current).fill(null).map(()=>({nome:"",cpf:"",email:"",quarto:""}))];
+      }
+      if(n<current){
+        return a.slice(0,n);
+      }
+      return a;
+    });
+  };
   
   const enviar=()=>{
     if(!f.nome||!f.cpf||!f.nasc||!f.tel||!f.email||!f.quarto||!f.chegada||!f.hora){
@@ -555,7 +565,7 @@ function Formulario({res,setRes}){
                 />
               </Fg>
               <Fg l="Total de hóspedes *">
-                <select style={inp} value={qtd} onChange={e=>setQtd(parseInt(e.target.value))}>
+                <select style={inp} value={qtd} onChange={e=>handleQtdChange(parseInt(e.target.value))}>
                   {Array.from({length:20},(_,i)=><option key={i+1} value={i+1}>{i+1} pessoa{i>0?"s":""}</option>)}
                 </select>
               </Fg>
