@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const TC="#c05a3a",GOLD="#b8843a",VERDE="#3d6b4a",DARK="#1c1008";
-const QUARTOS=["Suíte Master (King)","Suíte 2 (Casal+Solteiro)","Suíte 3 (Casal)","Suíte 4 (Casal+Solteiro)","Quarto Compartilhado"];
+const QUARTOS=["Suíte Reale (King)","Suíte Allegra (Casal+Solteiro)","Suíte Armonia (Família)","Suíte Serena (2 Casal+Solteiro)","Quarto Condiviso Compartilhado"];
 const fmtCPF=v=>{v=v.replace(/\D/g,"");v=v.replace(/(\d{3})(\d)/,"$1.$2");v=v.replace(/(\d{3})(\d)/,"$1.$2");v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2");return v.slice(0,14);};
 
 const MENU=[
@@ -102,7 +102,7 @@ function Home({ir}){
 }
 
 function Quartos(){
-  const qs=[{n:1,i:"👑",nm:"Suíte Reale",c:"King Size",d:"Cama king size, banheiro privativo.",t:"✓ Banheiro privativo com hidromassagem · 2 pessoas",sb:false},{n:2,i:"🌿",nm:"Suíte 2 Allegra",c:"Casal + Solteiro elevada com escorregador",d:"Cama casal e solteiro, banheiro privativo.",t:"✓ Banheiro privativo · até 3 pessoas",sb:false},{n:3,i:"🌊",nm:"Suíte 3 Armonia",c:"Familia",d:"2 Cama casal, banheiro privativo.",t:"✓ Banheiro privativo · 4 pessoas",sb:false},{n:4,i:"☀️",nm:"Suíte 4 Serena",c:"2 Casal + Solteiro",d:"2 Cama casal e solteiro, banheiro privativo.",t:"✓ Banheiro privativo · até 5 pessoas",sb:false},{n:5,i:"🤝",nm:"Quarto condiviso Compartilhado",c:"2 Casal + Beliche",d:"Sem banheiro privativo. Para grupos grandes.",t:"⚠ Sem banheiro privativo - até 6 pessoas",sb:true}];
+  const qs=[{n:1,i:"👑",nm:"Suíte Reale",c:"King Size",d:"Cama king size, banheiro privativo.",t:"✓ Banheiro privativo com hidromassagem · 2 pessoas",sb:false},{n:2,i:"🌿",nm:"Suíte Allegra",c:"Casal + Solteiro elevada com escorregador",d:"Cama casal e solteiro, banheiro privativo.",t:"✓ Banheiro privativo · até 3 pessoas",sb:false},{n:3,i:"🌊",nm:"Suíte Armonia",c:"Família",d:"2 Cama casal, banheiro privativo.",t:"✓ Banheiro privativo · 4 pessoas",sb:false},{n:4,i:"☀️",nm:"Suíte Serena",c:"2 Casal + Solteiro",d:"2 Cama casal e solteiro, banheiro privativo.",t:"✓ Banheiro privativo · até 5 pessoas",sb:false},{n:5,i:"🤝",nm:"Quarto Condiviso Compartilhado",c:"2 Casal + Beliche",d:"Sem banheiro privativo. Para grupos grandes.",t:"⚠ Sem banheiro privativo - até 6 pessoas",sb:true}];
   return(
     <div style={{padding:"44px 20px",background:"#f4efe6"}}>
       <div style={{maxWidth:860,margin:"0 auto"}}>
@@ -509,6 +509,7 @@ function Formulario({res,setRes}){
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
               <Fg l="Nome completo *">
                 <input 
+                  key="titular-nome"
                   style={inp} 
                   value={f.nome} 
                   onChange={e=>updF("nome",e.target.value)} 
@@ -519,6 +520,7 @@ function Formulario({res,setRes}){
               </Fg>
               <Fg l="CPF *">
                 <input 
+                  key="titular-cpf"
                   style={inp} 
                   value={f.cpf} 
                   onChange={e=>updF("cpf",fmtCPF(e.target.value))} 
@@ -529,6 +531,7 @@ function Formulario({res,setRes}){
               </Fg>
               <Fg l="Data de nascimento *">
                 <input 
+                  key="titular-nasc"
                   style={inp} 
                   type="date" 
                   value={f.nasc} 
@@ -537,6 +540,7 @@ function Formulario({res,setRes}){
               </Fg>
               <Fg l="Telefone / WhatsApp *">
                 <input 
+                  key="titular-tel"
                   style={inp} 
                   value={f.tel} 
                   onChange={e=>updF("tel",e.target.value)} 
@@ -547,6 +551,7 @@ function Formulario({res,setRes}){
               </Fg>
               <Fg l="E-mail *">
                 <input 
+                  key="titular-email"
                   style={inp} 
                   type="email" 
                   value={f.email} 
@@ -557,6 +562,7 @@ function Formulario({res,setRes}){
               </Fg>
               <Fg l="Cidade / Estado *">
                 <input 
+                  key="titular-end"
                   style={inp} 
                   value={f.end} 
                   onChange={e=>updF("end",e.target.value)} 
@@ -565,18 +571,19 @@ function Formulario({res,setRes}){
                 />
               </Fg>
               <Fg l="Total de hóspedes *">
-                <select style={inp} value={qtd} onChange={e=>handleQtdChange(parseInt(e.target.value))}>
+                <select key="titular-qtd" style={inp} value={qtd} onChange={e=>handleQtdChange(parseInt(e.target.value))}>
                   {Array.from({length:20},(_,i)=><option key={i+1} value={i+1}>{i+1} pessoa{i>0?"s":""}</option>)}
                 </select>
               </Fg>
               <Fg l="Seu quarto *">
-                <select style={inp} value={f.quarto} onChange={e=>updF("quarto",e.target.value)}>
+                <select key="titular-quarto" style={inp} value={f.quarto} onChange={e=>updF("quarto",e.target.value)}>
                   <option value="">Selecione...</option>
                   {QUARTOS.map(q=><option key={q}>{q}</option>)}
                 </select>
               </Fg>
               <Fg l="Data de chegada *">
                 <input 
+                  key="titular-chegada"
                   style={inp} 
                   type="date" 
                   value={f.chegada} 
@@ -584,7 +591,7 @@ function Formulario({res,setRes}){
                 />
               </Fg>
               <Fg l="Horário aproximado *">
-                <select style={inp} value={f.hora} onChange={e=>updF("hora",e.target.value)}>
+                <select key="titular-hora" style={inp} value={f.hora} onChange={e=>updF("hora",e.target.value)}>
                   <option value="">Selecione...</option>
                   {["15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00","20:30","21:00","21:30","22:00"].map(h=><option key={h}>{h}</option>)}
                 </select>
@@ -594,11 +601,12 @@ function Formulario({res,setRes}){
               <div style={{marginTop:18}}>
                 <p style={{fontFamily:"Georgia,serif",fontSize:".97rem",color:"#3a2010",marginBottom:13,paddingBottom:8,borderBottom:"1px solid #e0d5c5"}}>👥 Acompanhantes</p>
                 {ac.map((a,i)=>(
-                  <div key={i} style={{background:"#f4efe6",borderRadius:8,padding:14,marginBottom:10}}>
+                  <div key={`acomp-${i}`} style={{background:"#f4efe6",borderRadius:8,padding:14,marginBottom:10}}>
                     <p style={{fontSize:".76rem",fontWeight:700,color:"#3a2010",marginBottom:10}}>Hóspede {i+2}</p>
                     <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9}}>
                       <Fg l="Nome *">
                         <input 
+                          key={`acomp-nome-${i}`}
                           style={inp} 
                           value={a.nome} 
                           onChange={e=>updAc(i,"nome",e.target.value)} 
@@ -608,6 +616,7 @@ function Formulario({res,setRes}){
                       </Fg>
                       <Fg l="CPF *">
                         <input 
+                          key={`acomp-cpf-${i}`}
                           style={inp} 
                           value={a.cpf} 
                           onChange={e=>updAc(i,"cpf",fmtCPF(e.target.value))} 
@@ -618,6 +627,7 @@ function Formulario({res,setRes}){
                       </Fg>
                       <Fg l="E-mail">
                         <input 
+                          key={`acomp-email-${i}`}
                           style={inp} 
                           type="email" 
                           value={a.email} 
@@ -626,7 +636,7 @@ function Formulario({res,setRes}){
                         />
                       </Fg>
                       <Fg l="Quarto">
-                        <select style={inp} value={a.quarto} onChange={e=>updAc(i,"quarto",e.target.value)}>
+                        <select key={`acomp-quarto-${i}`} style={inp} value={a.quarto} onChange={e=>updAc(i,"quarto",e.target.value)}>
                           <option value="">Selecione...</option>
                           {QUARTOS.map(q=><option key={q}>{q}</option>)}
                         </select>
