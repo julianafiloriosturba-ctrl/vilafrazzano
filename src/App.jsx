@@ -102,7 +102,7 @@ function Home({ir}){
 }
 
 function Quartos(){
-  const qs=[{n:1,i:"👑",nm:"Suíte Reale",c:"King Size",d:"Cama king size, banheiro privativo.",t:"✓ Banheiro privativo com hidromassagem · 2 pessoas",sb:false},{n:2,i:"🌿",nm:"Suíte 2 Allegra",c:"Casal + Solteiro elevada com escorregador",d:"Cama casal e solteiro, banheiro privativo.",t:"✓ Banheiro privativo · até 3 pessoas",sb:false},{n:3,i:"🌊",nm:"Suíte 3 Armonia",c:"Familia",d:"2 Cama casal, banheiro privativo.",t:"✓ Banheiro privativo · 4 pessoas",sb:false},{n:4,i:"☀️",nm:"Suíte 4 Serena",c:"2 Casal + Solteiro",d:"2 Cama casal e solteiro, banheiro privativo.",t:"✓ Banheiro privativo · até 5 pessoas",sb:false},{n:5,i:"🤝",nm:"Quarto condiviso Compartilhado",c:"2 Casal + Beliche",d:"Sem banheiro privativo. Para grupos grandes.",t:"⚠ Sem banheiro privativo",sb:true}];
+  const qs=[{n:1,i:"👑",nm:"Suíte Reale",c:"King Size",d:"Cama king size, banheiro privativo.",t:"✓ Banheiro privativo com hidromassagem · 2 pessoas",sb:false},{n:2,i:"🌿",nm:"Suíte 2 Allegra",c:"Casal + Solteiro elevada com escorregador",d:"Cama casal e solteiro, banheiro privativo.",t:"✓ Banheiro privativo · até 3 pessoas",sb:false},{n:3,i:"🌊",nm:"Suíte 3 Armonia",c:"Familia",d:"2 Cama casal, banheiro privativo.",t:"✓ Banheiro privativo · 4 pessoas",sb:false},{n:4,i:"☀️",nm:"Suíte 4 Serena",c:"2 Casal + Solteiro",d:"2 Cama casal e solteiro, banheiro privativo.",t:"✓ Banheiro privativo · até 5 pessoas",sb:false},{n:5,i:"🤝",nm:"Quarto condiviso Compartilhado",c:"2 Casal + Beliche",d:"Sem banheiro privativo. Para grupos grandes.",t:"⚠ Sem banheiro privativo - até 6 pessoas",sb:true}];
   return(
     <div style={{padding:"44px 20px",background:"#f4efe6"}}>
       <div style={{maxWidth:860,margin:"0 auto"}}>
