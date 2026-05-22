@@ -12,6 +12,7 @@ const MENU=[
   {id:"casa",l:"🏠 Casa"},
   {id:"acesso",l:"🚗 Acesso"},
   {id:"passeios",l:"🗺 Passeios"},
+  {id:"parceiros",l:"🤝 Parceiros"},
   {id:"regras",l:"📋 Regras"},
   {id:"form",l:"✍️ Formulário"},
   {id:"avaliacao",l:"⭐ Avaliação"},
@@ -41,6 +42,7 @@ export default function App(){
       {pg==="casa"&&<Casa/>}
       {pg==="acesso"&&<Acesso/>}
       {pg==="passeios"&&<Passeios/>}
+      {pg==="parceiros"&&<Parceiros/>}
       {pg==="regras"&&<Regras/>}
       {pg==="form"&&<Formulario res={res} setRes={setRes}/>}
       {pg==="avaliacao"&&<Avaliacao/>}
@@ -78,7 +80,7 @@ function Home({ir}){
           <p style={{fontSize:".62rem",letterSpacing:".28em",textTransform:"uppercase",color:TC,fontWeight:700,marginBottom:6}}>Navegue pelo guia</p>
           <h2 style={{fontFamily:"Georgia,serif",fontSize:"1.8rem",marginBottom:20}}>Tudo que você <em style={{color:TC}}>precisa</em></h2>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(140px,1fr))",gap:10}}>
-            {[{id:"quartos",i:"🛏",t:"Quartos"},{id:"checkin",i:"🔑",t:"Check-in"},{id:"checkout",i:"🚪",t:"Check-out"},{id:"casa",i:"🏠",t:"Usar a Casa"},{id:"acesso",i:"🚗",t:"Portão & App"},{id:"passeios",i:"🗺",t:"Passeios"},{id:"regras",i:"📋",t:"Regras"},{id:"form",i:"✍️",t:"Formulário"},{id:"avaliacao",i:"⭐",t:"Avaliação"}].map(m=>(
+            {[{id:"quartos",i:"🛏",t:"Quartos"},{id:"checkin",i:"🔑",t:"Check-in"},{id:"checkout",i:"🚪",t:"Check-out"},{id:"casa",i:"🏠",t:"Usar a Casa"},{id:"acesso",i:"🚗",t:"Portão & App"},{id:"passeios",i:"🗺",t:"Passeios"},{id:"parceiros",i:"🤝",t:"Parceiros"},{id:"regras",i:"📋",t:"Regras"},{id:"form",i:"✍️",t:"Formulário"},{id:"avaliacao",i:"⭐",t:"Avaliação"}].map(m=>(
               <button key={m.id} onClick={()=>ir(m.id)} style={{background:"#fff",border:"1px solid #e0d5c5",borderRadius:10,padding:"16px 12px",textAlign:"center",cursor:"pointer"}}>
                 <span style={{fontSize:"1.5rem",display:"block",marginBottom:6}}>{m.i}</span>
                 <span style={{fontSize:".78rem",fontWeight:700,color:"#3a2010"}}>{m.t}</span>
@@ -352,6 +354,45 @@ function Passeios(){
   );
 }
 
+function Parceiros(){
+  const parc=[
+    {i:"📱",n:"ELEKTROID",loc:"EcoBeach Mall — Estacionamento",desc:"Loja de eletrônicos e acessórios",benef:"5% de desconto em quase todos os itens",obs:"Apresente o cupom de hóspede da Vila Frazzano"},
+    {i:"🎡",n:"Super Máquinas Museu",loc:"Porto das Dunas",desc:"Museu interativo de máquinas e veículos",benef:"10% de desconto no ingresso",obs:"Válido apenas para ingressos de entrada"},
+    {i:"🍔",n:"567 Burger",loc:"Franquia Porto das Dunas",desc:"Hamburgueria artesanal",benef:"Isenção da taxa de 10% do garçom + batata pequena grátis",obs:"Válido para pedidos no local"}
+  ];
+  return(
+    <div style={{padding:"44px 20px"}}>
+      <div style={{maxWidth:860,margin:"0 auto"}}>
+        <span style={{fontSize:".62rem",letterSpacing:".28em",textTransform:"uppercase",color:TC,fontWeight:700}}>🤝 Benefícios</span>
+        <h2 style={{fontFamily:"Georgia,serif",fontSize:"clamp(1.7rem,4vw,2.3rem)",margin:"8px 0 18px"}}>Parcerias <em style={{color:TC}}>Exclusivas</em></h2>
+        <p style={{color:"#7a6450",fontSize:".9rem",marginBottom:24,maxWidth:580}}>Aproveite descontos e benefícios especiais em nossos parceiros. Basta informar que é hóspede da Vila Frazzano!</p>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:13}}>
+          {parc.map(p=>(
+            <div key={p.n} style={{background:"#fff",border:"1px solid #e0d5c5",borderTop:"3px solid "+GOLD,borderRadius:10,padding:"20px 18px"}}>
+              <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}>
+                <span style={{fontSize:"1.6rem"}}>{p.i}</span>
+                <div>
+                  <p style={{fontFamily:"Georgia,serif",fontSize:"1.05rem",color:"#3a2010",margin:0}}>{p.n}</p>
+                  <p style={{fontSize:".68rem",color:"#7a6450",margin:"2px 0 0"}}>{p.loc}</p>
+                </div>
+              </div>
+              <p style={{fontSize:".83rem",color:"#7a6450",marginBottom:10}}>{p.desc}</p>
+              <div style={{background:"rgba(184,132,58,.08)",borderRadius:8,padding:"10px 12px",marginBottom:10}}>
+                <p style={{fontSize:".72rem",fontWeight:700,letterSpacing:".08em",textTransform:"uppercase",color:GOLD,marginBottom:4}}>🎁 Benefício</p>
+                <p style={{fontSize:".85rem",color:"#3a2010",fontWeight:600,margin:0}}>{p.benef}</p>
+              </div>
+              <p style={{fontSize:".75rem",color:"#7a6450",fontStyle:"italic"}}>ℹ️ {p.obs}</p>
+            </div>
+          ))}
+        </div>
+        <div style={{marginTop:20,padding:"14px 18px",background:"#fff8f0",border:"1px solid rgba(192,90,58,.2)",borderRadius:10,fontSize:".84rem",color:"#7a6450",textAlign:"center"}}>
+          💡 <strong style={{color:TC}}>Dica:</strong> Mencione que você é hóspede da Vila Frazzano para garantir seu desconto!
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Regras(){
   const rs=[{t:"🗑 Lixo",its:["Sem coleta seletiva na região","Deixar ensacado atrás da casa ou na esquina","Não espalhar dentro do imóvel"]},{t:"🔇 Som & Silêncio",its:["Silêncio das 22h às 7h — temos vizinhos próximos","❌ PROIBIDO paredão ou equipamentos de grande potência"]},{t:"🏊 Piscina & Jacuzzi",its:["Jacuzzi para até 6 pessoas","Sem bronzeador/protetor em excesso","Proibido copos de vidro","Crianças sempre supervisionadas"]},{t:"👥 Ocupação",its:["Apenas hóspedes da reserva","❌ Proibida entrada de visitantes","🎉 Festas exigem autorização prévia"]},{t:"🧹 Limpeza & Fogão",its:["Manter imóvel e cozinha organizados","Fogão: superfície limpa e seca antes de usar"]}];
   return(
@@ -381,18 +422,69 @@ function Formulario({res,setRes}){
   const [f,setF]=useState({nome:"",cpf:"",nasc:"",tel:"",email:"",end:"",quarto:"",chegada:"",hora:""});
   const [ac,setAc]=useState([]);
   const [pl,setPl]=useState([""]);
+  
   const updF=(k,v)=>setF(p=>({...p,[k]:v}));
   const updAc=(i,k,v)=>setAc(p=>p.map((a,j)=>j===i?{...a,[k]:v}:a));
-  useEffect(()=>{const n=Math.max(0,qtd-1);setAc(a=>Array.from({length:n},(_,i)=>a[i]||{nome:"",cpf:"",email:"",quarto:""}));},[qtd]);
+  
+  useEffect(()=>{
+    const n=Math.max(0,qtd-1);
+    setAc(a=>Array.from({length:n},(_,i)=>a[i]||{nome:"",cpf:"",email:"",quarto:""}));
+  },[qtd]);
+  
   const enviar=()=>{
-    if(!f.nome||!f.cpf||!f.nasc||!f.tel||!f.email||!f.quarto||!f.chegada||!f.hora){alert("Preencha todos os campos obrigatórios (*).");return;}
-    for(let i=0;i<ac.length;i++){if(!ac[i].nome||!ac[i].cpf){alert(`Preencha nome e CPF do hóspede ${i+2}.`);return;}}
-    setRes({timestamp:new Date().toISOString(),titular:{...f},qtd,placas:pl.filter(p=>p.trim()),acompanhantes:ac});
+    if(!f.nome||!f.cpf||!f.nasc||!f.tel||!f.email||!f.quarto||!f.chegada||!f.hora){
+      alert("Preencha todos os campos obrigatórios (*).");
+      return;
+    }
+    for(let i=0;i<ac.length;i++){
+      if(!ac[i].nome||!ac[i].cpf){
+        alert(`Preencha nome e CPF do hóspede ${i+2}.`);
+        return;
+      }
+    }
+    setRes({
+      timestamp:new Date().toISOString(),
+      titular:{...f},
+      qtd,
+      placas:pl.filter(p=>p.trim()),
+      acompanhantes:ac
+    });
     setEnviado(true);
   };
-  const Fg=({l,children})=>(<div style={{marginBottom:10}}><label style={{fontSize:".62rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"#7a6450",display:"block",marginBottom:3}}>{l}</label>{children}</div>);
-  const inp={width:"100%",padding:"10px 11px",border:"1px solid #e0d5c5",borderRadius:7,fontFamily:"inherit",fontSize:".87rem",color:"#1a1008",background:"#f4efe6",outline:"none",boxSizing:"border-box"};
-  if(enviado)return(<div style={{padding:"44px 20px",textAlign:"center"}}><div style={{maxWidth:440,margin:"0 auto",background:"#f0fff4",border:"1px solid rgba(61,107,74,.25)",borderRadius:12,padding:36}}><span style={{fontSize:"3rem"}}>🎉</span><h2 style={{fontFamily:"Georgia,serif",fontSize:"1.45rem",color:VERDE,margin:"12px 0 8px"}}>Check-in enviado!</h2><p style={{fontSize:".88rem",color:"#7a6450"}}>Recebemos seus dados. Em breve você receberá o código via WhatsApp.</p><p style={{marginTop:10,fontSize:".85rem",color:"#7a6450"}}><strong>Recepção:</strong> (85) 99172-7796</p></div></div>);
+  
+  const Fg=({l,children})=>(
+    <div style={{marginBottom:10}}>
+      <label style={{fontSize:".62rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"#7a6450",display:"block",marginBottom:3}}>{l}</label>
+      {children}
+    </div>
+  );
+  
+  const inp={
+    width:"100%",
+    padding:"10px 11px",
+    border:"1px solid #e0d5c5",
+    borderRadius:7,
+    fontFamily:"inherit",
+    fontSize:".87rem",
+    color:"#1a1008",
+    background:"#f4efe6",
+    outline:"none",
+    boxSizing:"border-box"
+  };
+  
+  if(enviado){
+    return(
+      <div style={{padding:"44px 20px",textAlign:"center"}}>
+        <div style={{maxWidth:440,margin:"0 auto",background:"#f0fff4",border:"1px solid rgba(61,107,74,.25)",borderRadius:12,padding:36}}>
+          <span style={{fontSize:"3rem"}}>🎉</span>
+          <h2 style={{fontFamily:"Georgia,serif",fontSize:"1.45rem",color:VERDE,margin:"12px 0 8px"}}>Check-in enviado!</h2>
+          <p style={{fontSize:".88rem",color:"#7a6450"}}>Recebemos seus dados. Em breve você receberá o código via WhatsApp.</p>
+          <p style={{marginTop:10,fontSize:".85rem",color:"#7a6450"}}><strong>Recepção:</strong> (85) 99172-7796</p>
+        </div>
+      </div>
+    );
+  }
+  
   return(
     <div style={{padding:"44px 20px"}}>
       <div style={{maxWidth:700,margin:"0 auto"}}>
@@ -405,20 +497,169 @@ function Formulario({res,setRes}){
             <p style={{fontSize:".73rem",color:"#7a6450",marginBottom:16}}><span style={{color:TC}}>*</span> Campos obrigatórios</p>
             <p style={{fontFamily:"Georgia,serif",fontSize:".97rem",color:"#3a2010",marginBottom:13,paddingBottom:8,borderBottom:"1px solid #e0d5c5"}}>👤 Titular</p>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
-              <Fg l="Nome completo *"><input style={inp} value={f.nome} onChange={e=>updF("nome",e.target.value)} placeholder="Nome completo"/></Fg>
-              <Fg l="CPF *"><input style={inp} value={f.cpf} onChange={e=>updF("cpf",fmtCPF(e.target.value))} placeholder="000.000.000-00"/></Fg>
-              <Fg l="Data de nascimento *"><input style={inp} type="date" value={f.nasc} onChange={e=>updF("nasc",e.target.value)}/></Fg>
-              <Fg l="Telefone / WhatsApp *"><input style={inp} value={f.tel} onChange={e=>updF("tel",e.target.value)} placeholder="(85) 99999-9999"/></Fg>
-              <Fg l="E-mail *"><input style={inp} type="email" value={f.email} onChange={e=>updF("email",e.target.value)} placeholder="email@exemplo.com"/></Fg>
-              <Fg l="Cidade / Estado *"><input style={inp} value={f.end} onChange={e=>updF("end",e.target.value)} placeholder="Fortaleza, CE"/></Fg>
-              <Fg l="Total de hóspedes *"><select style={inp} value={qtd} onChange={e=>setQtd(parseInt(e.target.value))}>{Array.from({length:20},(_,i)=><option key={i+1} value={i+1}>{i+1} pessoa{i>0?"s":""}</option>)}</select></Fg>
-              <Fg l="Seu quarto *"><select style={inp} value={f.quarto} onChange={e=>updF("quarto",e.target.value)}><option value="">Selecione...</option>{QUARTOS.map(q=><option key={q}>{q}</option>)}</select></Fg>
-              <Fg l="Data de chegada *"><input style={inp} type="date" value={f.chegada} onChange={e=>updF("chegada",e.target.value)}/></Fg>
-              <Fg l="Horário aproximado *"><select style={inp} value={f.hora} onChange={e=>updF("hora",e.target.value)}><option value="">Selecione...</option>{["15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00","20:30","21:00","21:30","22:00"].map(h=><option key={h}>{h}</option>)}</select></Fg>
+              <Fg l="Nome completo *">
+                <input 
+                  style={inp} 
+                  value={f.nome} 
+                  onChange={e=>updF("nome",e.target.value)} 
+                  placeholder="Nome completo"
+                  type="text"
+                  autoComplete="name"
+                />
+              </Fg>
+              <Fg l="CPF *">
+                <input 
+                  style={inp} 
+                  value={f.cpf} 
+                  onChange={e=>updF("cpf",fmtCPF(e.target.value))} 
+                  placeholder="000.000.000-00"
+                  type="text"
+                  inputMode="numeric"
+                />
+              </Fg>
+              <Fg l="Data de nascimento *">
+                <input 
+                  style={inp} 
+                  type="date" 
+                  value={f.nasc} 
+                  onChange={e=>updF("nasc",e.target.value)}
+                />
+              </Fg>
+              <Fg l="Telefone / WhatsApp *">
+                <input 
+                  style={inp} 
+                  value={f.tel} 
+                  onChange={e=>updF("tel",e.target.value)} 
+                  placeholder="(85) 99999-9999"
+                  type="tel"
+                  autoComplete="tel"
+                />
+              </Fg>
+              <Fg l="E-mail *">
+                <input 
+                  style={inp} 
+                  type="email" 
+                  value={f.email} 
+                  onChange={e=>updF("email",e.target.value)} 
+                  placeholder="email@exemplo.com"
+                  autoComplete="email"
+                />
+              </Fg>
+              <Fg l="Cidade / Estado *">
+                <input 
+                  style={inp} 
+                  value={f.end} 
+                  onChange={e=>updF("end",e.target.value)} 
+                  placeholder="Fortaleza, CE"
+                  type="text"
+                />
+              </Fg>
+              <Fg l="Total de hóspedes *">
+                <select style={inp} value={qtd} onChange={e=>setQtd(parseInt(e.target.value))}>
+                  {Array.from({length:20},(_,i)=><option key={i+1} value={i+1}>{i+1} pessoa{i>0?"s":""}</option>)}
+                </select>
+              </Fg>
+              <Fg l="Seu quarto *">
+                <select style={inp} value={f.quarto} onChange={e=>updF("quarto",e.target.value)}>
+                  <option value="">Selecione...</option>
+                  {QUARTOS.map(q=><option key={q}>{q}</option>)}
+                </select>
+              </Fg>
+              <Fg l="Data de chegada *">
+                <input 
+                  style={inp} 
+                  type="date" 
+                  value={f.chegada} 
+                  onChange={e=>updF("chegada",e.target.value)}
+                />
+              </Fg>
+              <Fg l="Horário aproximado *">
+                <select style={inp} value={f.hora} onChange={e=>updF("hora",e.target.value)}>
+                  <option value="">Selecione...</option>
+                  {["15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00","20:30","21:00","21:30","22:00"].map(h=><option key={h}>{h}</option>)}
+                </select>
+              </Fg>
             </div>
-            {ac.length>0&&(<div style={{marginTop:18}}><p style={{fontFamily:"Georgia,serif",fontSize:".97rem",color:"#3a2010",marginBottom:13,paddingBottom:8,borderBottom:"1px solid #e0d5c5"}}>👥 Acompanhantes</p>{ac.map((a,i)=>(<div key={i} style={{background:"#f4efe6",borderRadius:8,padding:14,marginBottom:10}}><p style={{fontSize:".76rem",fontWeight:700,color:"#3a2010",marginBottom:10}}>Hóspede {i+2}</p><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9}}><Fg l="Nome *"><input style={inp} value={a.nome} onChange={e=>updAc(i,"nome",e.target.value)} placeholder="Nome completo"/></Fg><Fg l="CPF *"><input style={inp} value={a.cpf} onChange={e=>updAc(i,"cpf",fmtCPF(e.target.value))} placeholder="000.000.000-00"/></Fg><Fg l="E-mail"><input style={inp} type="email" value={a.email} onChange={e=>updAc(i,"email",e.target.value)} placeholder="email@exemplo.com"/></Fg><Fg l="Quarto"><select style={inp} value={a.quarto} onChange={e=>updAc(i,"quarto",e.target.value)}><option value="">Selecione...</option>{QUARTOS.map(q=><option key={q}>{q}</option>)}</select></Fg></div></div>))}</div>)}
-            <div style={{marginTop:18}}><p style={{fontFamily:"Georgia,serif",fontSize:".97rem",color:"#3a2010",marginBottom:10,paddingBottom:8,borderBottom:"1px solid #e0d5c5"}}>🚗 Veículos</p>{pl.map((p,i)=>(<div key={i} style={{display:"flex",gap:8,marginBottom:8}}><input style={{...inp,textTransform:"uppercase"}} value={p} onChange={e=>setPl(v=>v.map((x,j)=>j===i?e.target.value.toUpperCase():x))} placeholder="ABC-1234"/>{pl.length>1&&<button onClick={()=>setPl(v=>v.filter((_,j)=>j!==i))} style={{background:"none",border:"none",color:"#aaa",cursor:"pointer",fontSize:"1.1rem"}}>✕</button>}</div>))}<button onClick={()=>setPl(p=>[...p,""])} style={{background:"none",border:"1px dashed #e0d5c5",color:"#7a6450",padding:"8px",borderRadius:7,fontSize:".73rem",cursor:"pointer",width:"100%",marginTop:4}}>+ Adicionar veículo</button></div>
-            <button onClick={enviar} style={{background:TC,color:"#fff",border:"none",padding:"13px",borderRadius:7,width:"100%",marginTop:20,fontFamily:"inherit",fontSize:".8rem",fontWeight:700,letterSpacing:".12em",textTransform:"uppercase",cursor:"pointer"}}>✅ Enviar Check-in</button>
+            {ac.length>0&&(
+              <div style={{marginTop:18}}>
+                <p style={{fontFamily:"Georgia,serif",fontSize:".97rem",color:"#3a2010",marginBottom:13,paddingBottom:8,borderBottom:"1px solid #e0d5c5"}}>👥 Acompanhantes</p>
+                {ac.map((a,i)=>(
+                  <div key={i} style={{background:"#f4efe6",borderRadius:8,padding:14,marginBottom:10}}>
+                    <p style={{fontSize:".76rem",fontWeight:700,color:"#3a2010",marginBottom:10}}>Hóspede {i+2}</p>
+                    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9}}>
+                      <Fg l="Nome *">
+                        <input 
+                          style={inp} 
+                          value={a.nome} 
+                          onChange={e=>updAc(i,"nome",e.target.value)} 
+                          placeholder="Nome completo"
+                          type="text"
+                        />
+                      </Fg>
+                      <Fg l="CPF *">
+                        <input 
+                          style={inp} 
+                          value={a.cpf} 
+                          onChange={e=>updAc(i,"cpf",fmtCPF(e.target.value))} 
+                          placeholder="000.000.000-00"
+                          type="text"
+                          inputMode="numeric"
+                        />
+                      </Fg>
+                      <Fg l="E-mail">
+                        <input 
+                          style={inp} 
+                          type="email" 
+                          value={a.email} 
+                          onChange={e=>updAc(i,"email",e.target.value)} 
+                          placeholder="email@exemplo.com"
+                        />
+                      </Fg>
+                      <Fg l="Quarto">
+                        <select style={inp} value={a.quarto} onChange={e=>updAc(i,"quarto",e.target.value)}>
+                          <option value="">Selecione...</option>
+                          {QUARTOS.map(q=><option key={q}>{q}</option>)}
+                        </select>
+                      </Fg>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div style={{marginTop:18}}>
+              <p style={{fontFamily:"Georgia,serif",fontSize:".97rem",color:"#3a2010",marginBottom:10,paddingBottom:8,borderBottom:"1px solid #e0d5c5"}}>🚗 Veículos</p>
+              {pl.map((p,i)=>(
+                <div key={i} style={{display:"flex",gap:8,marginBottom:8}}>
+                  <input 
+                    style={{...inp,textTransform:"uppercase"}} 
+                    value={p} 
+                    onChange={e=>setPl(v=>v.map((x,j)=>j===i?e.target.value.toUpperCase():x))} 
+                    placeholder="ABC-1234"
+                    type="text"
+                  />
+                  {pl.length>1&&(
+                    <button 
+                      onClick={()=>setPl(v=>v.filter((_,j)=>j!==i))} 
+                      style={{background:"none",border:"none",color:"#aaa",cursor:"pointer",fontSize:"1.1rem"}}
+                    >
+                      ✕
+                    </button>
+                  )}
+                </div>
+              ))}
+              <button 
+                onClick={()=>setPl(p=>[...p,""])} 
+                style={{background:"none",border:"1px dashed #e0d5c5",color:"#7a6450",padding:"8px",borderRadius:7,fontSize:".73rem",cursor:"pointer",width:"100%",marginTop:4}}
+              >
+                + Adicionar veículo
+              </button>
+            </div>
+            <button 
+              onClick={enviar} 
+              style={{background:TC,color:"#fff",border:"none",padding:"13px",borderRadius:7,width:"100%",marginTop:20,fontFamily:"inherit",fontSize:".8rem",fontWeight:700,letterSpacing:".12em",textTransform:"uppercase",cursor:"pointer"}}
+            >
+              ✅ Enviar Check-in
+            </button>
           </div>
         </div>
       </div>
